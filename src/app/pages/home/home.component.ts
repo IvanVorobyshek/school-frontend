@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment';
       <p class="api-url">API: {{ apiUrl }}</p>
       <p class="api-status">Status: {{ status() }}</p>
       <button (click)="checkApi()">Check API (/v1/auth/me)</button>
-      <button (click)="checkUsers()">Check Users (local DB)</button>
+      <button (click)="checkUsers()">Check Users ({{ apiUrl }})</button>
       @if (users()) {
         <pre class="users">{{ users() | json }}</pre>
       }
@@ -32,7 +32,7 @@ export class HomeComponent {
   apiUrl = environment.apiUrl;
   status = signal<string>('—');
   users = signal<unknown>(null);
-  private readonly localApiUrl = 'http://localhost/api/users';
+  private readonly usersUrl = `${environment.apiUrl}/api/users`;
 
   checkApi(): void {
     this.status.set('Checking...');
@@ -45,9 +45,9 @@ export class HomeComponent {
 
   checkUsers(): void {
     this.users.set(null);
-    this.api.getFromUrl<{ data?: unknown[] }>(this.localApiUrl).subscribe({
+    this.api.getFromUrl<{ data?: unknown[] }>(this.usersUrl).subscribe({
       next: (res) => this.users.set(res.data ?? res),
-      error: () => this.users.set({ error: 'Start Sail: sail up -d' })
+      error: (err) => this.users.set({ error: err?.message ?? 'API unavailable' })
     });
   }
 }
