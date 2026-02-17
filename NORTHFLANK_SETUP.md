@@ -129,7 +129,7 @@ API URL задаётся **на момент сборки** в `src/environments
 apiUrl: 'https://p01--school-api-dev--tcnk9xh79l5p.code.run'
 ```
 
-**Важно:** замени этот URL на **реальный Public URL** твоего `school-api-dev` из Northflank.
+**Важно:** заменить этот URL на **реальный Public URL** твоего `school-api-dev` из Northflank.
 
 ### Вариант A: Правка в репо (рекомендуется)
 

@@ -33,11 +33,12 @@ export class HomeComponent {
   status = signal<string>('—');
   users = signal<unknown>(null);
   private readonly usersUrl = `${environment.apiUrl}/api/users`;
+  private readonly mockAuthUrl = 'https://191bee93-5b57-4d44-90c0-026d6b21b713.mock.pstmn.io/v1/auth/me';
 
   checkApi(): void {
     this.status.set('Checking...');
     this.users.set(null);
-    this.api.get<unknown>('/v1/auth/me').subscribe({
+    this.api.getFromUrl<unknown>(this.mockAuthUrl).subscribe({
       next: (res) => this.status.set(`OK: ${(res as { name?: string })?.name ?? 'connected'}`),
       error: (err) => this.status.set(`Error: ${err.status || err.message}`)
     });
