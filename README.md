@@ -20,6 +20,8 @@ npm start
 | `ng serve --configuration=local` | localhost (Sail) |
 | `ng build --configuration=production` | school-api prod |
 
+npm start -- --configuration=local
+
 ## Northflank
 
 - **Dockerfile** — multi-stage: Node build + nginx serve

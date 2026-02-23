@@ -32,7 +32,7 @@ export class HomeComponent {
   apiUrl = environment.apiUrl;
   status = signal<string>('—');
   users = signal<unknown>(null);
-  private readonly usersUrl = `${environment.apiUrl}/api/users`;
+  private readonly usersUrl = `${environment.apiUrl}/v1/auth/test`;
   private readonly mockAuthUrl = 'https://191bee93-5b57-4d44-90c0-026d6b21b713.mock.pstmn.io/v1/auth/me';
 
   checkApi(): void {
